@@ -29,6 +29,6 @@ fi
 
 # Comparar la mida del fitxer amb la mida donada
 if [ "$MIDAFITXER" -gt "$MIDA" ]; then
-  echo "El fitxer '$FITXER' és més gran que $numMida bytes i és $DIF més gran."
+  echo "El fitxer '$FITXER' és més gran que $numMida bytes i és $DIF bytes més gran."
 
 fi

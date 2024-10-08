@@ -4,5 +4,14 @@
 
 PID=$1
 
-USCPU=$(ps -p $PID -o pid=,etime=etime,cputime=cputime)
-echo "$USCPU"
+TEMPSCPU=$(ps -p $PID -o etime=,cputime=)
+ETIME=$(ps -p $PID -o etime)
+CPUTIME=$(ps -p $PID -o cputime)
+
+echo "$TEMPSCPU"
+echo "$ETIME"
+echo "CPUTIME"
+
+USCPU= let $CPUTIME*100 / $ETIME
+
+echo "USCPU"
