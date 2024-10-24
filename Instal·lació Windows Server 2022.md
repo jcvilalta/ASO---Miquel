@@ -21,3 +21,6 @@ aws ec2 run-instances --image-id "ami-05f283f34603d6aed" --instance-type "t2.mic
 
 ## Quan haguem fet clic a "Get password" ens obrirà la següent pestanya on hem de pujar el fitxer .pem
 ![image](https://github.com/user-attachments/assets/507729f9-65af-48c6-bf49-932d72488107)
+
+
+## test VSCode
