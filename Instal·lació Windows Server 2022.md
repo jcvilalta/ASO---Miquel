@@ -22,4 +22,12 @@ aws ec2 run-instances --image-id "ami-05f283f34603d6aed" --instance-type "t2.mic
 ## Quan haguem fet clic a "Get password" ens obrirà la següent pestanya on hem de pujar el fitxer .pem
 ![image](https://github.com/user-attachments/assets/507729f9-65af-48c6-bf49-932d72488107)
 
+## El .pem ens el baixem abans d'entrar al laboratori, fem clic a "AWS Details" i després a "Download PEM" 
+![image](https://github.com/user-attachments/assets/721cd859-d4c8-4538-9b88-e58b82915ae5)
+
+## Ara ja podem pujar el fitxer, fem clic a "Upload private key file", busquem el fitxer i ja podem desxifrar la contrasenya
+![image](https://github.com/user-attachments/assets/cb4ddc2b-d55f-4594-826a-60a1f5f2946e)
+
+## Comq que ja tenim el fitxer .rdp baixat només hem de copiar la contrasenya i ja el podem obrir
+![image](https://github.com/user-attachments/assets/0b286e8e-e588-4b05-8be4-558aa699fcc9)
 
