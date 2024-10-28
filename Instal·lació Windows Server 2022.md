@@ -31,3 +31,15 @@ aws ec2 run-instances --image-id "ami-05f283f34603d6aed" --instance-type "t2.mic
 ## Comq que ja tenim el fitxer .rdp baixat només hem de copiar la contrasenya i ja el podem obrir
 ![image](https://github.com/user-attachments/assets/0b286e8e-e588-4b05-8be4-558aa699fcc9)
 
+## Quan ja hem fet tots aquests passos ja podem obrir el fitxer .rdp i fem clic a "Connect"
+![image](https://github.com/user-attachments/assets/eed38ab0-c1fd-4009-af1c-d24db709bdd0)
+
+## Ens demanarà la contrasenya, és la que hem desxifrat abans, la copiem i la posem, ja podem connectar-nos
+![image](https://github.com/user-attachments/assets/5392b0ca-3d6a-4ec4-8670-6953c98546e7)
+
+## Li diem que si que ens volem connectar
+![image](https://github.com/user-attachments/assets/97701e2c-d63f-4450-bbe2-5a78bd7f87ae)
+
+## Ja estem connectats
+![image](https://github.com/user-attachments/assets/cf392984-c8c8-4a6c-910f-b8f66d52f2b1)
+
