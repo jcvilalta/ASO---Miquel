@@ -23,5 +23,5 @@ sudo apt install realmd sssd samba-common-bin adcli -y
 echo "nameserver <IPServer>" | sudo tee /etc/resolv.conf
 
 # L'entrem al domini
-echo "Patata123." | sudo realm join --user="Administrator" "daidan.local" --install=/ -v
+echo "Patata123*" | sudo realm join --user="Administrator" "xukim.local" --install=/ -v
 ```
