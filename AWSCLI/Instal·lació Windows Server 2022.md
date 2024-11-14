@@ -60,4 +60,4 @@ aws ec2 run-instances \
 
 Quan s'hagi crear el servidor entrem per RDP i [instal·lem SSH](https://github.com/jcvilalta/jcvilalta/blob/main/AWSCLI/Instal%C2%B7laci%C3%B3%20SSH.md)
 
-[Instal·lar SSH via script](AWSCLI/Instal·lació SSH.md)
+[Instal·lar SSH via script](AWSCLI/Instal·lacióSSH.md)
