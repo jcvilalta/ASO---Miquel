@@ -70,3 +70,5 @@ Quan s'hagi creat el servidor entrem per RDP i [Iinstal·lem SSH via script](Ins
 
 Quan ja tinguem l'SSH isntal·lat [configurem el domini](CrearDominiAD.md)
 
+[Crear els clients Debian i afegir-los al domini](CrearClientsDebian&EntrarDomini.md)
+
