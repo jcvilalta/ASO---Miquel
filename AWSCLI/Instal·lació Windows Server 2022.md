@@ -68,5 +68,5 @@ aws ec2 run-instances \
 
 Quan s'hagi creat el servidor entrem per RDP i [Iinstal·lem SSH via script](InstallSSH.md)
 
-Quan ja tinguem l'SSH isntal·lat [configurem el domini](CreaciódominiAD.md)
+Quan ja tinguem l'SSH isntal·lat [configurem el domini](CrearDominiAD.md)
 
