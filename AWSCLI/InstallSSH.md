@@ -1,5 +1,5 @@
 # Ara realitzaré la instal·lació d'SSH
-## Per fer això ho faré mitjançant comandes, la primera comanda que hem d'executar és la següent
+## Per fer això ho faré mitjançant comandes, hem d'executar les següents comandes
 ```powershell
 # Instal·lar el servir SSH
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
