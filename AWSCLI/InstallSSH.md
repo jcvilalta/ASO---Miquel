@@ -1,7 +1,6 @@
-# Ara realitzaré la instal·lació d'SSH
-## Per fer això ho faré mitjançant comandes, hem d'executar les següents comandes
+# Instal·lació SSH (Powershell)
 ```powershell
-# Instal·lar el servir SSH
+# Instal·lar el servei SSH
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 
 # Iniciar el servei SSH
@@ -18,4 +17,11 @@ Add-LocalGroupMember -Group "Remote Management Users" -Member "Administrator"
 
 # Creació de la carpeta on guardem les claus SSH
 New-Item -ItemType Directory -Path $env:USERPROFILE\.ssh -Force
+```
+
+Generar claus SSH
+```
+ssh-keygen -t rsa -b 2048
+cd ~/.ssh
+ssh-add id_rsa
 ```
