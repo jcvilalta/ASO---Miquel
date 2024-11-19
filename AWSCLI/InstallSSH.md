@@ -47,6 +47,7 @@ Modificar la seguent linia de "C:\ProgramData\ssh\sshd_config"
 PasswordAuthentication no
 ```
 
+Reiniciar el server i canviem el nom
 ```powershell
 # Reiniciar SSH
 Restart-Service sshd
