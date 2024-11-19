@@ -36,3 +36,18 @@ icacls $env:USERPROFILE\.ssh /inheritance:r
 icacls $env:USERPROFILE\.ssh /grant "$($env:USERNAME):(OI)(CI)F"
 icacls $env:USERPROFILE\.ssh\authorized_keys /grant "$($env:USERNAME):F"
 ```
+
+Descomentar la seguent linia de "C:\ProgramData\ssh\sshd_config"
+PubkeyAuthentication yes
+
+Modificar la seguent linia de "C:\ProgramData\ssh\sshd_config"
+PasswordAuthentication no
+
+```powershell
+# Reiniciar SSH
+Restart-Service sshd
+
+# Canviar hostname i reiniciar servidor
+Rename-Computer -NewName "WS22" -Restart
+```
+
