@@ -56,3 +56,7 @@ Restart-Service sshd
 Rename-Computer -NewName "WS22" -Restart
 ```
 
+```bash
+# Connectar per SSH al server
+ssh Joaquim@ec2-52-23-197-70.compute-1.amazonaws.com
+```
