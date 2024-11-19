@@ -19,7 +19,7 @@ Add-LocalGroupMember -Group "Remote Management Users" -Member "Administrator"
 New-Item -ItemType Directory -Path $env:USERPROFILE\.ssh -Force
 ```
 
-Generar claus SSH
+Generar claus SSH des del Fedora
 ```
 ssh-keygen -t rsa -b 2048
 cd ~/.ssh
