@@ -38,10 +38,14 @@ icacls $env:USERPROFILE\.ssh\authorized_keys /grant "$($env:USERNAME):F"
 ```
 
 Descomentar la seguent linia de "C:\ProgramData\ssh\sshd_config"
+```
 PubkeyAuthentication yes
+```
 
 Modificar la seguent linia de "C:\ProgramData\ssh\sshd_config"
+```
 PasswordAuthentication no
+```
 
 ```powershell
 # Reiniciar SSH
