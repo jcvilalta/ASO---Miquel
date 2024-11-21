@@ -4,4 +4,4 @@ data="$1"
 
 git add /home/work/mboada/jcvilalta
 git commit -m "$data"
-git push
+git push origin main
