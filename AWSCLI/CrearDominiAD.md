@@ -5,5 +5,5 @@ Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
 Import-Module ADDSDeployment
 
 # Elevar el servidor a controlador de domini
-Install-ADDSForest -DomainName "daidan.local" -DomainNetbiosName "WindowsServer22" -SafeModeAdministratorPassword (ConvertTo-SecureString -AsPlainText "Patata123." -Force) -InstallDns -Force
+Install-ADDSForest -DomainName "xukim.local" -DomainNetbiosName "WindowsServer22" -SafeModeAdministratorPassword (ConvertTo-SecureString -AsPlainText "Patata123*" -Force) -InstallDns -Force
 ```
