@@ -125,3 +125,24 @@ sudo systemctl enable --now docker
 sudo apt install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
+
+3. Configurar el node Master
+**⚠️Executa només en el servidor master01b (192.168.0.120)⚠️**
+
+3.1. Inicialitzar el cluster Kubernetes
+```bash
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=192.168.0.120
+```
+⚠️Apunta la comanda que apareixerà per unir els workers al cluster⚠️
+
+3.2. Configurar kubectl per l'usuari actual
+```bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+3.3. Instal·lar la xarxa de pod (Calico)
+```bash
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+```
