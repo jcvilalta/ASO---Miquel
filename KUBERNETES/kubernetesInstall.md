@@ -25,3 +25,8 @@ echo "192.168.0.120 master01b" | sudo tee -a /etc/hosts
 echo "192.168.0.121 worker01b" | sudo tee -a /etc/hosts
 echo "192.168.0.122 worker02b" | sudo tee -a /etc/hosts
 ```
+1.3. Desactivar Swap (si hi ha partició swap)
+```bash
+sudo swapoff -a
+sudo sed -i '/ swap / s/^/#/' /etc/fstab
+```
