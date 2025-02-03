@@ -30,3 +30,14 @@ echo "192.168.0.122 worker02b" | sudo tee -a /etc/hosts
 sudo swapoff -a
 sudo sed -i '/ swap / s/^/#/' /etc/fstab
 ```
+
+1.4. Carregar mòduls del kernel necessaris
+```bash
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+overlay
+br_netfilter
+EOF
+
+sudo modprobe overlay
+sudo modprobe br_netfilter
+```
