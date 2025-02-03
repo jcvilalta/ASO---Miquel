@@ -18,3 +18,10 @@ Worker 2:
 ```bash
 sudo hostnamectl set-hostname worker02b
 ```
+
+Afegir els noms d'host al fitxer /etc/hosts a tots els servidors:
+```bash
+echo "192.168.0.120 master01b" | sudo tee -a /etc/hosts
+echo "192.168.0.121 worker01b" | sudo tee -a /etc/hosts
+echo "192.168.0.122 worker02b" | sudo tee -a /etc/hosts
+```
