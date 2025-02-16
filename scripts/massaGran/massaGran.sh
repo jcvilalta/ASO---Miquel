@@ -26,4 +26,5 @@ FILE_SIZE_KB=$(du -k "$FILE" | cut -f1)
 if [ $FILE_SIZE_KB -gt $FILE_SIZE ]; then
 	DIFFERENCE=$((FILE_SIZE_KB - FILE_SIZE))
 	echo "$DATE_HOUR - ALERTA: El fitxer $FILE és més gran que $FILE_SIZE kB (Diferència: $DIFFERENCE kB). Usuari: $USER" >> "$LOGS"
+	echo "ALERTA: EL fitxer $FILE és més gran que $FILE_SIZE kB (Diferència: $DIFFERENCE KB)."
 fi
