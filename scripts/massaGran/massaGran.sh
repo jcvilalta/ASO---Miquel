@@ -12,3 +12,9 @@ FILE=$2
 USER=$(whoami)
 DATE_HOUR=$(date "+%Y-%m-%d %H:%M:%S")
 LOGS="/var/log/scriptsErrors/massaGran.log"
+
+# Comprovar l'existència del fitxer
+if [ ! -f "FILE" ]; then
+	echo "$DATE_HOUR - Usuari: $USER - ERROR: $FILE no existeix." | tee -a $LOGS
+	exit 2
+fi
