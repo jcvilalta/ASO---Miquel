@@ -4,11 +4,10 @@ Aquest document explica el funcionament de l'script creat en Bash per comprovar 
 
 ## Contingut
 
-1. [Introducció](#introducció)
-2. [Com s'utilitza l'script](#com-sutilitza-lscript)
-3. [Com funciona l'script](#com-funciona-lscript)
-4. [Exemples d'ús](#exemples-dus)
-5. [Notes importants](#notes-importants)
+[Introducció](#introducció)
+[Com s'utilitza l'script](#com-sutilitza-lscript)
+[Exemples d'ús](#exemples-dus)
+[Notes importants](#notes-importants)
 
 ## Introducció
 
