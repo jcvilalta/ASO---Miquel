@@ -26,16 +26,16 @@ if [[ "$CONFIRMAR" == "s" || "$CONFIRMAR" == "S" ]]; then
 	if [[ -f "$DIR_DESTI/$FITXER_COPIA" ]]; then
 		echo "La còpia de seguretat ha sigut creada amb èxit: $DIR_DESTI/$FITXER_COPIA"
 		# Afegir als logs
-                echo "$DATA - Còpia creada: $DIR_DESTI/$FITXER_COPIA" >> "$LOGS"
+                echo "[ INFO ]: $DATA - Còpia creada: $DIR_DESTI/$FITXER_COPIA" >> "$LOGS"
 	else
 		echo "Hi ha hagut un problema en crear la còpia de seguretat."
 		# Afegir als logs
-		echo "$DATA - ERROR: No s'ha pogut crear la còpia." >> "$LOGS"
+		echo "[ ERROR ]: $DATA - No s'ha pogut crear la còpia." >> "$LOGS"
 	fi
 else
 	echo "Còpia de seguretat no creada."
 	# Afegir als logs
-	echo "$DATA - Còpia no creada (cancel·lat per l'usuari)." >> "$LOGS"
+	echo "[ INFO ]: $DATA - Còpia no creada (cancel·lat per l'usuari)." >> "$LOGS"
 fi
 
 # Funció per eliminar còpies antigues
@@ -50,8 +50,8 @@ eliminar_copies_antigues() {
         FITXERS_ANTICS=$(find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7)
 
         # Escriure la llista de fitxers als logs
-        echo "$DATA - Fitxers a eliminar:" >> "$LOGS_ANTIGUES"
-        echo "$FITXERS_ANTICS" >> "$LOGS_ANTIGUES"
+        echo "[ INFO ]: $DATA - Fitxers a eliminar:" >> "$LOGS_ANTIGUES"
+        echo "[ INFO ]: $FITXERS_ANTICS" >> "$LOGS_ANTIGUES"
 
 	# Mostrar llista de fitxers per pantalla
 	echo "$DATA - Fitxers a eliminar:"
@@ -65,14 +65,14 @@ eliminar_copies_antigues() {
             echo "$FITXERS_ANTICS" | xargs rm -f
 
             echo "$DATA - S'han eliminat $NUM_COPIES còpies."
-            echo "$DATA - Hi havia $NUM_COPIES còpies, han sigut eliminades." >> "$LOGS_ANTIGUES"
+            echo "[ INFO ]: $DATA - Hi havia $NUM_COPIES còpies, han sigut eliminades." >> "$LOGS_ANTIGUES"
         else
             echo "$DATA - No s'han eliminat les còpies antigues."
-            echo "$DATA - Eliminació cancel·lada per l'usuari." >> "$LOGS_ANTIGUES"
+            echo "[ INFO ]: $DATA - Eliminació cancel·lada per l'usuari." >> "$LOGS_ANTIGUES"
         fi
     else
         echo "$DATA - No hi ha còpies antigues, no esborrem res."
-        echo "$DATA - No hi havia cap còpia antiga, per tant no s'ha esborrat res" >> "$LOGS_ANTIGUES"
+        echo "[ INFO ]: $DATA - No hi havia cap còpia antiga, per tant no s'ha esborrat res" >> "$LOGS_ANTIGUES"
     fi
 }
 
