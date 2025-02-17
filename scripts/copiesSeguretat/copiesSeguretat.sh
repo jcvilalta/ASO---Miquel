@@ -25,7 +25,7 @@ if [[ "$CONFIRMAR" == "s" || "$CONFIRMAR" == "S" ]]; then
 	if [[ -f "$DIR_DESTI/$FITXER_COPIA" ]]; then
 		echo "La còpia de seguretat ha sigut creada amb èxit: $DIR_DESTI/$FITXER_COPIA"
 		# Afegir als logs
-                echo "$DATA) - Còpia creada: $DIR_DESTI/$FITXER_COPIA" >> "$LOGS"
+                echo "$DATA - Còpia creada: $DIR_DESTI/$FITXER_COPIA" >> "$LOGS"
 	else
 		echo "Hi ha hagut un problema en crear la còpia de seguretat."
 		# Afegir als logs
