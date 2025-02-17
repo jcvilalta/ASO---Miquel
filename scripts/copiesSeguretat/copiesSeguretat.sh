@@ -38,30 +38,42 @@ else
 	echo "$DATA - Còpia no creada (cancel·lat per l'usuari)." >> "$LOGS"
 fi
 
-# Funció per eliminar còpies antigues (més de 7 dies)
+# Funció per eliminar còpies antigues
 eliminar_copies_antigues() {
-	echo "$DATA - Comprovant còpies antigues..."
+    echo "$DATA - Comprovant si hi ha còpies antigues..."
 
-	# Comptar número de còpies antigues
-	NUM_COPIES=$(find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7 | wc -l)
+    # Comptar número de còpies antigues
+    NUM_COPIES=$(find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7 | wc -l)
 
-	if [[ "$NUM_COPIES" -gt 0 ]]; then
-                # Guardar la llista de fitxers antics
-                FITXERS_ANTICS=$(find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7)
+    if [[ "$NUM_COPIES" -gt 0 ]]; then
+        # Guardar la llista de fitxers antics
+        FITXERS_ANTICS=$(find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7)
 
-                # Escriure la llista de fitxers als logs
-                echo "$DATA - Fitxers eliminats:" >> "$LOGS_ANTIGUES"
-                echo "$FITXERS_ANTICS" >> "$LOGS_ANTIGUES"
+        # Escriure la llista de fitxers als logs
+        echo "$DATA - Fitxers a eliminar:" >> "$LOGS_ANTIGUES"
+        echo "$FITXERS_ANTICS" >> "$LOGS_ANTIGUES"
 
-                # Eliminar fitxers antics
-                echo "$FITXERS_ANTICS" | xargs rm -f
+	# Mostrar llista de fitxers per pantalla
+	echo "$DATA - Fitxers a eliminar:"
+	echo "$FITXERS_ANTICS"
 
-                echo "$DATA - S'han eliminat $NUM_COPIES còpies."
-		echo "$DATA - Hi havia $NUM_COPIES còpies, han sigut eliminades." >> "$LOGS_ANTIGUES"
+        # Demanar confirmació per eliminar les còpies antigues
+        read -p "Estàs segur que vols eliminar aquestes còpies antigues? (s/n): " CONFIRMAR_ELIMINACIO
+
+        if [[ "$CONFIRMAR_ELIMINACIO" == "s" || "$CONFIRMAR_ELIMINACIO" == "S" ]]; then
+            # Eliminar fitxers antics
+            echo "$FITXERS_ANTICS" | xargs rm -f
+
+            echo "$DATA - S'han eliminat $NUM_COPIES còpies."
+            echo "$DATA - Hi havia $NUM_COPIES còpies, han sigut eliminades." >> "$LOGS_ANTIGUES"
         else
-                echo "$DATA - No hi ha còpies antigues, no esborrem res."
-		echo "$DATA - No hi havia cap còpia antiga, per tant no s'ha esborrat res" >> "$LOGS_ANTIGUES"
+            echo "$DATA - No s'han eliminat les còpies antigues."
+            echo "$DATA - Eliminació cancel·lada per l'usuari." >> "$LOGS_ANTIGUES"
         fi
+    else
+        echo "$DATA - No hi ha còpies antigues, no esborrem res."
+        echo "$DATA - No hi havia cap còpia antiga, per tant no s'ha esborrat res" >> "$LOGS_ANTIGUES"
+    fi
 }
 
 # Executar la funció un cop creada la còpia
