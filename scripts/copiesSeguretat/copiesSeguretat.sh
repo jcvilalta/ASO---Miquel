@@ -50,7 +50,7 @@ eliminar_copies_antigues() {
 	# Guardar la llista de fitxers antics
         FITXERS_ANTICS=$(find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7)
 	# Afegir el prefix [ INFO ] a cada línia llistada de fitxers antics als logs
-	FITXERS_ANTICS_CLASSIFICATS=$(echo "$FITXERS_ANTICS" | sed 's/^/[ INFO ]: /')
+	FITXERS_ANTICS_CLASSIFICATS=$(echo "$FITXERS_ANTICS" | sed 's/^\([^\n]*\)$/[ FITXER ]: \1/')
 
         # Escriure la llista de fitxers als logs
         echo "[ INFO ]: $DATA - Fitxers a eliminar:" >> "$LOGS_ANTIGUES"
