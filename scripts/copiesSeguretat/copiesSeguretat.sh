@@ -36,3 +36,16 @@ else
 	# Afegir als logs
 	echo "$DATA - Còpia no creada (cancel·lat per l'usuari)." >> "$LOGS"
 fi
+
+# Funció per eliminar còpies antigues (més de 7 dies)
+eliminar_copies_anitgues() {
+	echo "$DATA - Comprovant còpies antigues..." >> "$LOGS"
+
+	# Buscar i eliminar arxius més antics de 7 dies
+	find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7 -print -delete >> "$LOGS" 2>&1
+
+	echo "$DATA - Còpies antigues eliminades (si n'hi havia)." >> "$LOGS"
+}
+
+# Executar la funció un cop creada la còpia
+eliminar_copies_antigues
