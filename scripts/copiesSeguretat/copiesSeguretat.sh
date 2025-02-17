@@ -41,17 +41,27 @@ fi
 # Funció per eliminar còpies antigues (més de 7 dies)
 eliminar_copies_antigues() {
 	echo "$DATA - Comprovant còpies antigues..."
-	# Afegir als logs
-	echo "$DATA - Comprovant còpies antigues..." >> "$LOGS_ANTIGUES"
 
-	# Buscar i eliminar arxius més antics de 7 dies
-	find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7 -print -delete
-	# Afegir als logs
-	find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7 -print -delete >> "$LOGS_ANTIGUES" 2>&1
+	# Comptar número de còpies antigues
+	NUM_COPIES=$(find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7 | wc -l)
 
-	echo "$DATA - Còpies antigues eliminades (si n'hi havia)."
-	# Afegir als logs
-	echo "$DATA - Còpies antigues eliminades (si n'hi havia)." >> "$LOGS_ANTIGUES"
+	if [[ "$NUM_COPIES" -gt 0 ]]; then
+                # Guardar la llista de fitxers antics
+                FITXERS_ANTICS=$(find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7)
+
+                # Escriure la llista de fitxers als logs
+                echo "$DATA - Fitxers eliminats:" >> "$LOGS_ANTIGUES"
+                echo "$FITXERS_ANTICS" >> "$LOGS_ANTIGUES"
+
+                # Eliminar fitxers antics
+                echo "$FITXERS_ANTICS" | xargs rm -f
+
+                echo "$DATA - S'han eliminat $NUM_COPIES còpies."
+		echo "$DATA - Hi havia $NUM_COPIES còpies, han sigut eliminades." >> "$LOGS_ANTIGUES"
+        else
+                echo "$DATA - No hi ha còpies antigues, no esborrem res."
+		echo "$DATA - No hi havia cap còpia antiga, per tant no s'ha esborrat res" >> "$LOGS_ANTIGUES"
+        fi
 }
 
 # Executar la funció un cop creada la còpia
