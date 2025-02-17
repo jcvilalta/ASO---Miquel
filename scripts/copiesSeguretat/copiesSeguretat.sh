@@ -12,6 +12,7 @@ FITXER_COPIA="còpia_$DATA.tar.gz"
 
 # Fitxer de logs
 LOGS="/var/log/scriptsErrors/copiesSeguretat/copiesSeguretat.log"
+LOGS_ANTIGUES="/var/log/scriptsErrors/copiesSeguretat/copiesAntigues.log"
 
 # Demanem confirmació per crear la còpia
 
@@ -38,13 +39,19 @@ else
 fi
 
 # Funció per eliminar còpies antigues (més de 7 dies)
-eliminar_copies_anitgues() {
-	echo "$DATA - Comprovant còpies antigues..." >> "$LOGS"
+eliminar_copies_antigues() {
+	echo "$DATA - Comprovant còpies antigues..."
+	# Afegir als logs
+	echo "$DATA - Comprovant còpies antigues..." >> "$LOGS_ANTIGUES"
 
 	# Buscar i eliminar arxius més antics de 7 dies
-	find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7 -print -delete >> "$LOGS" 2>&1
+	find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7 -print -delete
+	# Afegir als logs
+	find "$DIR_DESTI" -type f -name "còpia_*.tar.gz" -mtime +7 -print -delete >> "$LOGS_ANTIGUES" 2>&1
 
-	echo "$DATA - Còpies antigues eliminades (si n'hi havia)." >> "$LOGS"
+	echo "$DATA - Còpies antigues eliminades (si n'hi havia)."
+	# Afegir als logs
+	echo "$DATA - Còpies antigues eliminades (si n'hi havia)." >> "$LOGS_ANTIGUES"
 }
 
 # Executar la funció un cop creada la còpia
