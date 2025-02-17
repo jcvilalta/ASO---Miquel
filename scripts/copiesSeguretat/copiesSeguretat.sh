@@ -5,7 +5,7 @@ DIR_ORIGEN="/home/xukim/Documents"
 DIR_DESTI="/home/xukim/copies"
 
 # Data actual (per incloure al nom de la còpia)
-DATA=$(date +'%d-%m-%Y')
+DATA=$(date +'%d-%m-%Y_%H-%M-%S')
 
 # Nom fitxer còpia
 FITXER_COPIA="còpia_$DATA.tar.gz"
