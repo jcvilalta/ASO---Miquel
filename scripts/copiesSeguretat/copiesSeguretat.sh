@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Dir origen i dir destí
-DIR_ORIGEN="/home/xukim/Documents"
+# Dir destí
 DIR_DESTI="/home/xukim/copies"
 
 # Data actual (per incloure al nom de la còpia)
@@ -14,28 +13,50 @@ FITXER_COPIA="còpia_$DATA.tar.gz"
 LOGS="/var/log/scriptsErrors/copiesSeguretat/copiesSeguretat.log"
 LOGS_ANTIGUES="/var/log/scriptsErrors/copiesSeguretat/copiesAntigues.log"
 
-# Demanem confirmació per crear la còpia
+# Funció per demanar i validar el directori d'origen
+demanar_directori_origen() {
+    while true; do
+        read -p "Introdueix el directori del qual vols fer la còpia de seguretat: " DIR_ORIGEN
 
+        # Si l'usuari no introdueix res, cancel·lar el procés
+        if [[ -z "$DIR_ORIGEN" ]]; then
+            echo "No s'ha introduït cap directori. Cancel·lant la còpia de seguretat."
+            exit 1
+        fi
+
+        # Comprovar si el directori existeix
+        if [[ -d "$DIR_ORIGEN" ]]; then
+            break
+        else
+            echo "El directori no existeix. Torna a intentar-ho."
+        fi
+    done
+}
+
+# Cridar la funció per demanar el directori d'origen
+demanar_directori_origen
+
+# Demanem confirmació per crear la còpia
 read -p "Estàs segur que vols crear una còpia de seguretat? (s/n): " CONFIRMAR
 
 if [[ "$CONFIRMAR" == "s" || "$CONFIRMAR" == "S" ]]; then
-	# Crear còpia compressa
-	tar -czf "$DIR_DESTI/$FITXER_COPIA" -C "$DIR_ORIGEN" .
+    # Crear còpia compressa
+    tar -czf "$DIR_DESTI/$FITXER_COPIA" -C "$DIR_ORIGEN" .
 
-	# Comprovem si la còpia s'ha creat correctament
-	if [[ -f "$DIR_DESTI/$FITXER_COPIA" ]]; then
-		echo "La còpia de seguretat ha sigut creada amb èxit: $DIR_DESTI/$FITXER_COPIA"
-		# Afegir als logs
-                echo "[ INFO ]: $DATA - Còpia creada: $DIR_DESTI/$FITXER_COPIA" >> "$LOGS"
-	else
-		echo "Hi ha hagut un problema en crear la còpia de seguretat."
-		# Afegir als logs
-		echo "[ ERROR ]: $DATA - No s'ha pogut crear la còpia." >> "$LOGS"
-	fi
+    # Comprovem si la còpia s'ha creat correctament
+    if [[ -f "$DIR_DESTI/$FITXER_COPIA" ]]; then
+        echo "La còpia de seguretat ha sigut creada amb èxit: $DIR_DESTI/$FITXER_COPIA"
+        # Afegir als logs
+        echo "[ INFO ]: $DATA - Còpia creada: $DIR_DESTI/$FITXER_COPIA" >> "$LOGS"
+    else
+        echo "Hi ha hagut un problema en crear la còpia de seguretat."
+        # Afegir als logs
+        echo "[ ERROR ]: $DATA - No s'ha pogut crear la còpia." >> "$LOGS"
+    fi
 else
-	echo "Còpia de seguretat no creada."
-	# Afegir als logs
-	echo "[ INFO ]: $DATA - Còpia no creada (cancel·lat per l'usuari)." >> "$LOGS"
+    echo "Còpia de seguretat no creada."
+    # Afegir als logs
+    echo "[ INFO ]: $DATA - Còpia no creada (cancel·lat per l'usuari)." >> "$LOGS"
 fi
 
 # Funció per eliminar còpies antigues
