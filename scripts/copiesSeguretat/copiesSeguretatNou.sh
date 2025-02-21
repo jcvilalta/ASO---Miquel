@@ -25,3 +25,6 @@ fi
 # Crear el directori destí si no existeix
 mkdir -p "$DIR_DESTI"
 
+# Generar nom de l'arxiu de la còpia
+DATA=$(date + %Y&m%d_%H%M%S")
+FITXER_COPIA="$DIR_DESTI/copia_$(basename "$DIR_DESTI")_$DATA.tar.gz"
