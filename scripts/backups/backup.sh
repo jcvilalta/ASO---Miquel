@@ -21,7 +21,7 @@ log_message() {
 # Comprovar que s'ha passat almenys un argument
 if [ -z "$DIR_ORIGEN" ]; then
     log_message "Error: No s'ha passat el directori d'origen."
-    echo "Ús: $0 <directori_origen> [ELIMINAR=N]" | tee -a "$FITXER_LOG"
+    echo "Ús: $(basename "$0") <directori_origen> [ELIMINAR=N]" | tee -a "$FITXER_LOG"
     exit 1
 fi
 
