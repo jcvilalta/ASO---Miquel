@@ -12,6 +12,7 @@ DIR_ORIGEN="$1"
 
 # Paràmetre ELIMINAR (per a còpies antigues)
 ELIMINAR="$2"
+DIES="$3"
 
 # Crear el directori de logs si no existeix
 mkdir -p "$(dirname "$FITXER_LOG")"
@@ -63,9 +64,16 @@ fi
 
 # Comprovar si s'ha passat el paràmetre per eliminar còpies antigues
 if [[ "$ELIMINAR" = "-a" ]]; then
+	# Si es passa el paràmetre DIES, es fa servir el valor introduit, sino és per defecte 7 dies
+	if [ -z "$DIES" ]; then
+	    DIES=7
+	fi
+
+	echo "Eliminant còpies amb més de $DIES dies d'antiguitat..."
+
 	#Eliminar còpies antigues de més de 7 dies
-	log_message "Eliminant còpies antigues de més de 7 dies..."
-	find "$DIR_DESTI" -type f -name "*.tar.gz" -mtime +7 -exec rm -f {} \; && \
-	log_message "Còpies antigues eliminades." || \
+
+	find "$DIR_DESTI" -type f -name "*.tar.gz" -mtime +$DIES -exec rm -f {} \; && \
+	log_message "Còpies antigues de més de $DIES dies eliminades." || \
 	log_message "Error en eliminar còpies antigues."
 fi
