@@ -63,5 +63,5 @@ fi
 
 # Comprovar si s'ha passat ELIMINAR
 if [ "$ELIMINAR" == "Y" ]; then
-	find "$DIR_DESTI" -type f -name "copia_$(basename "$(DIR_ORIGEN")_*" -mtime +7 -exec rm -f {} \;
+	find "$DIR_DESTI" -type f -name "copia_$(basename "$DIR_ORIGEN")_*" -mtime +7 -exec rm -f {} \;
 	log_message "Còpies antigues de més de 7 dies eliminades."
