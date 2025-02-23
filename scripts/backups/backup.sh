@@ -1,4 +1,4 @@
-#!/bin/bash
+	#!/bin/bash
 # còpia DIRECTORI [ELIMINAR=N]
 
 # Directori on es guardaran les còpies
@@ -31,14 +31,14 @@ if [ ! -d "$DIR_ORIGEN" ]; then
     exit 2
 fi
 
+# Crear el directori destí si no existeix
+mkdir -p "$DIR_DESTI"
+
 # Comprovar permisos d'escriptura al directori de destí
 if [ ! -w "$DIR_DESTI" ]; then
     log_message "Error: No tens permisos d'escriptura al directori de destí '$DIR_DESTI'."
     exit 4
 fi
-
-# Crear el directori destí si no existeix
-mkdir -p "$DIR_DESTI"
 
 # Generar nom de l'arxiu de la còpia
 DATA=$(date +%Y%m%d_%H%M%S)
