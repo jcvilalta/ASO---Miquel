@@ -10,6 +10,9 @@ FITXER_LOG="/var/log/scriptsErrors/backups/backup.log"
 # Directori origen (del qual es fa la còpia)
 DIR_ORIGEN="$1"
 
+# Paràmetre ELIMINAR (per a còpies antigues)
+ELIMINAR="$2"
+
 # Crear el directori de logs si no existeix
 mkdir -p "$(dirname "$FITXER_LOG")"
 
@@ -57,3 +60,8 @@ else
     log_message "Error en crear la còpia de seguretat"
     exit 3
 fi
+
+# Comprovar si s'ha passat ELIMINAR
+if [ "$ELIMINAR" == "Y" ]; then
+	find "$DIR_DESTI" -type f -name "copia_$(basename "$(DIR_ORIGEN")_*" -mtime +7 -exec rm -f {} \;
+	log_message "Còpies antigues de més de 7 dies eliminades."
