@@ -1,4 +1,4 @@
-	#!/bin/bash
+#!/bin/bash
 # còpia DIRECTORI [ELIMINAR=N]
 
 # Directori on es guardaran les còpies
@@ -61,8 +61,11 @@ else
     exit 3
 fi
 
-# Comprovar si s'ha passat ELIMINAR
-if [ "$ELIMINAR" = "Y" ]; then
-	find "$DIR_DESTI" -type f -name "copia_$(basename "$DIR_ORIGEN")_*" -mtime +7 -exec rm -rf {} \;
-	log_message "Còpies antigues de més de 7 dies eliminades."
+# Comprovar si s'ha passat el paràmetre per eliminar còpies antigues
+if [[ "$ELIMINAR" = "-a" ]]; then
+	#Eliminar còpies antigues de més de 7 dies
+	log_message "Eliminant còpies antigues de més de 7 dies..."
+	find "$DIR_DESTI" -type f -name "*.tar.gz" -mtime +7 -exec rm -f {} \; && \
+	log_message "Còpies antigues eliminades." || \
+	log_message "Error en eliminar còpies antigues."
 fi
