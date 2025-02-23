@@ -4,6 +4,12 @@
 # Ús de l'script
 US="Ús: $(basename "$0") <directori_origen> [ELIMINAR=N] [DIES=N]"
 
+# Comprovar permís d'execució
+if [ ! -x "$0" ]; then
+	echo "Error: l'script no té permisos per executar-se."
+	exit 126
+fi
+
 # Directori on es guardaran les còpies
 DIR_DESTI="/home/xukim/copies"
 
@@ -80,3 +86,5 @@ if [[ "$ELIMINAR" = "-a" ]]; then
 	log_message "Còpies antigues de més de $DIES dies eliminades." || \
 	log_message "Error en eliminar còpies antigues."
 fi
+
+
