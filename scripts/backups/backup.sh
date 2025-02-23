@@ -13,6 +13,12 @@ DIR_ORIGEN="$1"
 # Crear el directori de logs si no existeix
 mkdir -p "$(dirname "$FITXER_LOG")"
 
+# Comprovar permisos d'escriptura al fitxer de log
+if [ -e "$FITXER_LOG" ] && [ ! -w "$FITXER_LOG" ]; then
+    echo "Error: No tens permisos d'escriptura al fitxer de log '$FITXER_LOG'."
+    exit 5
+fi
+
 # Funció per escriure al log
 log_message() {
     echo "$(date +%Y-%m-%d\ %H:%M:%S) - $1" | tee -a "$FITXER_LOG"
