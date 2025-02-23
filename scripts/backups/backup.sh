@@ -1,5 +1,8 @@
 #!/bin/bash
-# còpia DIRECTORI [ELIMINAR=N]
+# còpia DIRECTORI [ELIMINAR=N] [DIES=N]
+
+# Ús de l'script
+US="Ús: $(basename "$0") <directori_origen> [ELIMINAR=N] [DIES=N]"
 
 # Directori on es guardaran les còpies
 DIR_DESTI="/home/xukim/copies"
@@ -31,7 +34,7 @@ log_message() {
 # Comprovar que s'ha passat almenys un argument
 if [ -z "$DIR_ORIGEN" ]; then
     log_message "Error: No s'ha passat el directori d'origen."
-    echo "Ús: $(basename "$0") <directori_origen> [ELIMINAR=N]" | tee -a "$FITXER_LOG"
+    echo "$US" | tee -a "$FITXER_LOG"
     exit 1
 fi
 
