@@ -146,3 +146,13 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```bash
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 ```
+
+3.4. Comanda per saber la comanda per afegir els nodes
+```bash
+kubeadm token create --print-join-command
+```
+
+3.5. Unir workers al master
+```bash
+kubeadm join 192.168.2.20:6443 --token y06n29.570bsygccg11z04m --discovery-token-ca-cert-hash sha256:9fcbd67cde73fefda757fecf5beb467ba583945c130f90c7477be9f3e9c7fb22
+```
