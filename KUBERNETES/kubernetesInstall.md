@@ -21,9 +21,9 @@
 
    Afegir els noms d'host al fitxer /etc/hosts a tots els servidors:
    ```bash
-   echo "192.168.0.120 master01b" | sudo tee -a /etc/hosts
-   echo "192.168.0.121 worker01b" | sudo tee -a /etc/hosts
-   echo "192.168.0.122 worker02b" | sudo tee -a /etc/hosts
+   echo "192.168.2.20 master01b" | sudo tee -a /etc/hosts
+   echo "192.168.2.21 worker01b" | sudo tee -a /etc/hosts
+   echo "192.168.2.22 worker02b" | sudo tee -a /etc/hosts
    ```
    1.3. Desactivar Swap (si hi ha partició swap)
    ```bash
