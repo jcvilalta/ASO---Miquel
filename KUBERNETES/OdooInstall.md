@@ -124,3 +124,19 @@ spec:
   type: LoadBalancer
 
 ```
+
+## Aplicar la configuració a Kubernetes
+```bash
+kubectl apply -f postgres-deployment.yaml
+kubectl apply -f postgres-service.yaml
+kubectl apply -f odoo-deployment.yaml
+kubectl apply -f odoo-service.yaml
+```
+
+Hauriem de veure el següent "output"
+```bash
+deployment.apps/odoo-db created
+service/odoo-db-service created
+deployment.apps/odoo created
+service/odoo-service created
+```
