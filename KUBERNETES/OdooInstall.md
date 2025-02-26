@@ -62,3 +62,41 @@ spec:
       targetPort: 5432
   clusterIP: None
 ```
+
+## Fitxer pel deployment d'Odoo
+```bash
+nano odoo-deployment.yaml
+```
+
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odoo
+  namespace: odoo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odoo
+  template:
+    metadata:
+      labels:
+        app: odoo
+    spec:
+      containers:
+      - name: odoo
+        image: odoo:latest
+        env:
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_DB
+          value: odoo
+        - name: POSTGRES_USER
+          value: asix
+        - name: POSTGRES_PASSWORD
+          value: patata
+        ports:
+        - containerPort: 8069
+
+```
