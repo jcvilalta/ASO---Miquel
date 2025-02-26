@@ -140,3 +140,16 @@ service/odoo-db-service created
 deployment.apps/odoo created
 service/odoo-service created
 ```
+
+## Comprovem que s'ha desplegat correctament
+```bash
+kubectl get deployments -n odoo
+```
+
+```bash
+kubectl get svc -n odoo
+```
+
+```bash
+kubectl get pods -n odoo
+```
