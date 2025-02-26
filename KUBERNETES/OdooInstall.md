@@ -1,1 +1,2 @@
 
+# Instal·larem Odoo
