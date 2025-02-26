@@ -63,11 +63,12 @@ spec:
   clusterIP: None
 ```
 
-## Fitxer pel deployment d'Odoo
+## Fitxer YAML pel deployment d'Odoo
 ```bash
 nano odoo-deployment.yaml
 ```
 
+Posem el següent contingut
 ```bash
 apiVersion: apps/v1
 kind: Deployment
@@ -95,8 +96,31 @@ spec:
         - name: POSTGRES_USER
           value: asix
         - name: POSTGRES_PASSWORD
-          value: patata
+          value: ZusBNvER
         ports:
         - containerPort: 8069
+
+```
+
+## Fitxer YAML pel servei d'Odoo
+```bash
+nano odoo-service.yaml
+```
+
+Posem el següent contingut
+```bash
+apiVersion: v1
+kind: Service
+metadata:
+  name: odoo-service
+  namespace: odoo
+spec:
+  selector:
+    app: odoo
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8069
+  type: LoadBalancer
 
 ```
