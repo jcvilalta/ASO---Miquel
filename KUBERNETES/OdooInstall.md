@@ -40,3 +40,25 @@ spec:
         ports:
         - containerPort: 5432
 ```
+
+## Fitxer pel servei PostgreSQL
+```bash
+nano postgres-service.yaml
+```
+
+Posem el següent contingut
+```bash
+apiVersion: v1
+kind: Service
+metadata:
+  name: odoo-db-service
+  namespace: odoo
+spec:
+  selector:
+    app: odoo-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  clusterIP: None
+```
