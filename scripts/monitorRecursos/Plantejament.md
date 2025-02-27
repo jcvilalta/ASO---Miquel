@@ -14,3 +14,12 @@ Farem servir comandes de Linux:
 - **Memòria**: `free -m`
 - **Disc**: `df -h`
 - _**Xarxa (opcional)**: `vnstat` o `ifstat`_
+
+## 3. Com s'executarà?
+
+Podem fer que el script s'executi en bucle cada X segons (per exemple, cada 5 segons) amb:
+
+```bash
+while true; do ... done
+```
+També es podria executar com a cron job cada minut si no volem que estigui en execució contínua.
