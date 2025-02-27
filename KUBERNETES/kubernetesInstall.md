@@ -21,9 +21,9 @@
 
    Afegir els noms d'host al fitxer /etc/hosts a tots els servidors:
    ```bash
-   echo "192.168.0.120 master01b" | sudo tee -a /etc/hosts
-   echo "192.168.0.121 worker01b" | sudo tee -a /etc/hosts
-   echo "192.168.0.122 worker02b" | sudo tee -a /etc/hosts
+   echo "192.168.2.20 master01b" | sudo tee -a /etc/hosts
+   echo "192.168.2.21 worker01b" | sudo tee -a /etc/hosts
+   echo "192.168.2.22 worker02b" | sudo tee -a /etc/hosts
    ```
    1.3. Desactivar Swap (si hi ha partició swap)
    ```bash
@@ -145,4 +145,14 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 3.3. Instal·lar la xarxa de pod (Calico)
 ```bash
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+```
+
+3.4. Comanda per saber la comanda per afegir els nodes
+```bash
+kubeadm token create --print-join-command
+```
+
+3.5. Unir workers al master
+```bash
+kubeadm join 192.168.2.20:6443 --token y06n29.570bsygccg11z04m --discovery-token-ca-cert-hash sha256:9fcbd67cde73fefda757fecf5beb467ba583945c130f90c7477be9f3e9c7fb22
 ```
