@@ -12,9 +12,12 @@ fi
 
 # Directori on es guardaran les còpies
 DIR_DESTI="/home/xukim/copies"
-
 # Fitxer de logs
 FITXER_LOG="/var/log/scriptsErrors/backups/backup.log"
+# Directori de logs antics
+DIR_LOGS_ANTICS="/home/xukim/copies/logsAntics"
+# Mida màxima dels logs (1MB)
+MAX_LOG=$((1024 * 1024))
 
 # Directori origen (del qual es fa la còpia)
 DIR_ORIGEN="$1"
@@ -35,6 +38,16 @@ fi
 # Funció per escriure al log
 log_message() {
     echo "$(date +%Y-%m-%d\ %H:%M:%S) - $1" | tee -a "$FITXER_LOG"
+}
+
+# Funció per la rotació de logs si superem la mida màxima
+rotar_log() {
+    if [ -e "$FITXER_LOG" ] && [ $(stat -c %s "$FITXER_LOG") -ge $MAX_LOG ]; then
+        DATA=$(date +%Y%m%d_%H%M%S)
+        mv "$FITXER_LOG" "$DIR_LOGS_ANTICS/backup_$DATA.log"
+        touch "$FITXER_LOG"
+        log_message "S'ha rotat el fitxer de log."
+    fi
 }
 
 # Comprovar que s'ha passat almenys un argument
@@ -86,5 +99,3 @@ if [[ "$ELIMINAR" = "-a" ]]; then
 	log_message "Còpies antigues de més de $DIES dies eliminades." || \
 	log_message "Error en eliminar còpies antigues."
 fi
-
-
