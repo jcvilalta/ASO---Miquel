@@ -20,17 +20,11 @@ DIR_ORIGEN="$1"
 ELIMINAR="$2"
 DIES="$3"
 
-# Funció per escriure al log
-log_message() {
-    echo "$(date +%Y-%m-%d\ %H:%M:%S) - $1" | tee -a "$FITXER_LOG"
-}
-
 # Funció per a les comprovacions
 comprovar() {
     # Comprovar que s'ha passat almenys un argument (el directori origen)
     if [ -z "$DIR_ORIGEN" ]; then
-        log_message "Error: No s'ha passat el directori d'origen."
-        echo "$US" | tee -a "$FITXER_LOG"
+        echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ ERROR ] No s'ha passat el directori d'origen." >> "$FITXER_LOG"
         exit 1
     fi
 
@@ -45,8 +39,8 @@ comprovar() {
 
         #Eliminar còpies antigues de més de 7 dies
         find "$DIR_DESTI" -type f -name "*.tar.gz" -mtime +$DIES -exec rm -f {} \; && \
-        log_message "Còpies antigues de més de $DIES dies eliminades." || \
-        log_message "Error en eliminar còpies antigues."
+        echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ INFO ] Còpies antigues de més de $DIES dies eliminades."  >> "$FITXER_LOG" || \
+        echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ ERROR ] Còpies antigues no eliminades." >> "$FITXER_LOG"
     fi
 
     # Comprovar que el directori origen existeix
