@@ -20,6 +20,10 @@ DIR_ORIGEN="$1"
 ELIMINAR="$2"
 DIES="$3"
 
+# ======================
+# FUNCIONS
+# ======================
+
 # Funció per a les comprovacions
 comprovar() {
     # Comprovar que s'ha passat almenys un argument (el directori origen)
@@ -63,20 +67,28 @@ comprovar() {
     fi
 }
 
-# Crear el directori de logs si no existeix
-mkdir -p "$(dirname "$FITXER_LOG")"
-
 # Funció per la rotació de logs si superem la mida màxima
 rotar_log() {
     if [ -e "$FITXER_LOG" ] && [ $(stat -c %s "$FITXER_LOG") -ge $MAX_LOG ]; then
-	mkdir -p "$DIR_LOGS_ANTICS"
+        mkdir -p "$DIR_LOGS_ANTICS"
         DATA=$(date +%Y%m%d_%H%M%S)
         mv "$FITXER_LOG" "$DIR_LOGS_ANTICS/backup_$DATA.log"
         touch "$FITXER_LOG"
         echo "$(date +%Y-%m-%d\ %H:%M:%S) - S'ha rotat el fitxer de log."
-	echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ INFO ] S'ha rotat el fitxer de log." >> "$FITXER_LOG"
+        echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ INFO ] S'ha rotat el fitxer de log." >> "$FITXER_LOG"
     fi
 }
+
+# ======================
+# EXECUCIÓ
+# ======================
+
+comprovar
+
+rotar_log
+
+# Crear el directori de logs si no existeix
+mkdir -p "$(dirname "$FITXER_LOG")"
 
 # Crear el directori destí si no existeix
 mkdir -p "$DIR_DESTI"
