@@ -68,6 +68,7 @@ mkdir -p "$(dirname "$FITXER_LOG")"
 # Funció per la rotació de logs si superem la mida màxima
 rotar_log() {
     if [ -e "$FITXER_LOG" ] && [ $(stat -c %s "$FITXER_LOG") -ge $MAX_LOG ]; then
+	mkdir -p "$DIR_LOGS_ANTICS"
         DATA=$(date +%Y%m%d_%H%M%S)
         mv "$FITXER_LOG" "$DIR_LOGS_ANTICS/backup_$DATA.log"
         touch "$FITXER_LOG"
