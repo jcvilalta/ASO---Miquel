@@ -45,7 +45,7 @@ comprovar() {
 
     # Comprovar que el directori origen existeix
     if [ ! -d "$DIR_ORIGEN" ]; then
-        log_message "Error: El directori '$DIR_ORIGEN' no existeix."
+        echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ ERROR ]  El directori '$DIR_ORIGEN' no existeix." >> "$FITXER_LOG"
         exit 2
     fi
 
@@ -57,7 +57,7 @@ comprovar() {
 
     # Comprovar permisos d'escriptura al directori de destí
     if [ ! -w "$DIR_DESTI" ]; then
-        log_message "Error: No tens permisos d'escriptura al directori de destí '$DIR_DESTI'."
+        echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ ERROR ] No tens permisos d'escriptura al directori de destí '$DIR_DESTI'." >> "$FITXER_LOG"
         exit 4
     fi
 }
@@ -71,7 +71,7 @@ rotar_log() {
         DATA=$(date +%Y%m%d_%H%M%S)
         mv "$FITXER_LOG" "$DIR_LOGS_ANTICS/backup_$DATA.log"
         touch "$FITXER_LOG"
-        log_message "S'ha rotat el fitxer de log."
+        echo "$(date +%Y-%m-%d\ %H:%M:%S) - S'ha rotat el fitxer de log." || echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ INFO ] S'ha rotat el fitxer de log." >> "$FITXER_LOG"
     fi
 }
 
@@ -84,8 +84,8 @@ FITXER_COPIA="copia_$(basename "$DIR_ORIGEN")_$DATA.tar.gz"
 
 # Fer la còpia de seguretat
 if tar -czf "$DIR_DESTI/$FITXER_COPIA" -C "$DIR_ORIGEN" . 2>> "$FITXER_LOG"; then
-    log_message "Còpia de seguretat creada: $DIR_DESTI/$FITXER_COPIA"
+    echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ INFO ] Còpia de seguretat creada: $DIR_DESTI/$FITXER_COPIA"
 else
-    log_message "Error en crear la còpia de seguretat"
+    echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ ERROR ] La còpia de seguretat NO s'ha creat correctament"
     exit 3
 fi
