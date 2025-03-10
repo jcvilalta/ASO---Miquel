@@ -24,7 +24,8 @@ DIES="$3"
 comprovar() {
     # Comprovar que s'ha passat almenys un argument (el directori origen)
     if [ -z "$DIR_ORIGEN" ]; then
-        echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ ERROR ] No s'ha passat el directori d'origen." >> "$FITXER_LOG"
+        echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ ERROR ] No s'ha passat el directori d'origen."
+	echo "$US"
         exit 1
     fi
 
@@ -39,8 +40,8 @@ comprovar() {
 
         #Eliminar còpies antigues de més de 7 dies
         find "$DIR_DESTI" -type f -name "*.tar.gz" -mtime +$DIES -exec rm -f {} \; && \
-        echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ INFO ] Còpies antigues de més de $DIES dies eliminades."  >> "$FITXER_LOG" || \
-        echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ ERROR ] Còpies antigues no eliminades." >> "$FITXER_LOG"
+        echo "Còpies antigues de més de $DIES dies eliminades." || \
+        echo "Còpies antigues no eliminades."
     fi
 
     # Comprovar que el directori origen existeix
