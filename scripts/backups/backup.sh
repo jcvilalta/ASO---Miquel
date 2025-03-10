@@ -71,7 +71,8 @@ rotar_log() {
         DATA=$(date +%Y%m%d_%H%M%S)
         mv "$FITXER_LOG" "$DIR_LOGS_ANTICS/backup_$DATA.log"
         touch "$FITXER_LOG"
-        echo "$(date +%Y-%m-%d\ %H:%M:%S) - S'ha rotat el fitxer de log." || echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ INFO ] S'ha rotat el fitxer de log." >> "$FITXER_LOG"
+        echo "$(date +%Y-%m-%d\ %H:%M:%S) - S'ha rotat el fitxer de log."
+	echo "$(date +%Y-%m-%d\ %H:%M:%S) - [ INFO ] S'ha rotat el fitxer de log." >> "$FITXER_LOG"
     fi
 }
 
