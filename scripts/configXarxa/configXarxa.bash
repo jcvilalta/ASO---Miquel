@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Verificar que l'usuari és root
-if [ "$(id -u)" != "0" ]: then
+if [ "$(id -u)" != "0" ]; then
 	echo "ERROR: Aquest script s'ha d'executar com a root"
 	exit 1
 fi
@@ -37,7 +37,7 @@ restore_backup() {
 	echo "Restaurant últim backup..."
 
 	# Trobar l'últim backup
-	LAST_BACKUP=$(ls -td "$BACKUP_DIR"/*/ | head -l)
+	LAST_BACKUP=$(ls -td "$BACKUP_DIR"/*/ | head -1)
 
 	if [ -z "$LAST_BACKUP" ]; then
 		echo "ERROR: No hi ha backups disponibles"
