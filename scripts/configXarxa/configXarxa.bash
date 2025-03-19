@@ -15,7 +15,7 @@ RESOLV_CONF="/etc/resolv.conf"
 FIREWALL_PROFILES=("none" "webserver" "ssh-only")
 
 # Funció per crear backups de la configuració de xarxa
-fer_backup() {
+do_backup() {
 	echo "Fent backup de la configuració actual..."
 
 	# Crear directori siu no existeix
@@ -31,3 +31,6 @@ fer_backup() {
 
 	echo "Backup guardat a: $BACKUP_PATH"
 }
+
+# Funció per restaurar backups
+restore_backup() {}
