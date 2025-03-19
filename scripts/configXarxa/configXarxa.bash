@@ -33,4 +33,21 @@ do_backup() {
 }
 
 # Funció per restaurar backups
-restore_backup() {}
+restore_backup() {
+	echo "Restaurant últim backup..."
+
+	# Trobar l'últim backup
+	LAST_BACKUP=$(ls -td "$BACKUP_DIR"/*/ | head -l)
+
+	if [ -z "$LAST_BACKUP" ]; then
+		echo "ERROR: No hi ha backups disponibles"
+		exit 1
+	fi
+
+	# Restaurar fitxers
+    cp "$LAST_BACKUP/interfaces" /etc/network/ 2>/dev/null
+    cp "$LAST_BACKUP/resolv.conf" /etc/ 2>/dev/null
+    cp "$LAST_BACKUP"/*.yaml /etc/netplan/ 2>/dev/null
+
+	echo "Backup restaurat correctament. Reinicia el servei de xarxa."
+}
