@@ -51,3 +51,12 @@ restore_backup() {
 
 	echo "Backup restaurat correctament. Reinicia el servei de xarxa."
 }
+
+# Prova manual (executar amb --backup o --restore)
+if [ "$1" == "--backup" ]; then
+    do_backup
+elif [ "$1" == "--restore" ]; then
+    restore_backup
+else
+    echo "Ús: $0 [--backup|--restore]"
+fi
