@@ -147,8 +147,8 @@ conf_xarxa() {
 }
 
 config_dhcp() {
-	if [ -d "$NETPLAN_DIR" ]; then
-		cat > "$NETPLAN_DIR/01-dhcp.yaml" << EOF
+    if [ -d "$NETPLAN_DIR" ]; then
+        cat > "$NETPLAN_DIR/01-dhcp.yaml" << EOF
 network:
   version: 2
   renderer: networkd
@@ -156,10 +156,33 @@ network:
     $INTERFACE:
       dhcp4: true
 EOF
-	  netplan apply
-	else
-	  nmcli con mod "$INTERFACE" ipv4.method auto
-	  nmcli con down "$INTERFACE"
-	  nmcli con up "$INTERFACE"
-	fi
+        netplan apply
+    else
+        nmcli con mod "$INTERFACE" ipv4.method auto
+        nmcli con down "$INTERFACE"
+        nmcli con up "$INTERFACE"
+    fi
+}
+
+config_static() {
+    if [ -d "$NETPLAN_DIR" ]; then
+        cat > "$NETPLAN_DIR/01-static.yaml" << EOF
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    $INTERFACE:
+      addresses: [$IP/$NETMASK]
+      routes:
+        - to: default
+          via: $GATEWAY
+EOF
+        netplan apply
+    else
+        nmcli con mod "$INTERFACE" ipv4.method manual \
+            ipv4.addresses "$IP/$NETMASK" \
+            ipv4.gateway "$GATEWAY"
+        nmcli con down "$INTERFACE"
+        nmcli con up "$INTERFACE"
+    fi
 }
