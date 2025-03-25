@@ -62,6 +62,11 @@ process_args() {
 			;;
 		    --help)
 			show_help
+			exit 0
+			;;
+		    *)
+			echo "ERROR: Opció desconeguda: $1"
+			show_help
 			exit 1
 			;;
 		esac
