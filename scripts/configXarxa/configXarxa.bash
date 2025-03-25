@@ -71,7 +71,22 @@ process_args() {
 			;;
 		esac
 	done
+
+	# Validacions post-arguments
+    	if [ -z "$INTERFACE" ]; then
+        	echo "ERROR: Cal especificar --interface"
+        	exit 1
+    	fi
+
+	if [ -z "$DHCP" ]; then
+		if [ -z "$IP" ] || [ -z "$NETMASK" ] || [ -z "$GATEWAY" ]; then
+		echo "ERROR: Mode estàtic requereix --ip, --netmask i --gateway"
+		exit 1
+		fi
+	fi
 }
+
+
 
 # Funció per crear backups de la configuració de xarxa
 do_backup() {
