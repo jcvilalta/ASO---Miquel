@@ -86,6 +86,14 @@ process_args() {
 	fi
 }
 
+# Funció de validació d'IP
+valid_ip() {
+	local ip=$1
+	if [[ ! $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+		echo "ERROR: El format IP no és vàlid: $ip"
+		exit 1
+	fi
+}
 
 
 # Funció per crear backups de la configuració de xarxa
