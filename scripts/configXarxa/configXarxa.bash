@@ -187,7 +187,15 @@ EOF
     fi
 }
 
+# Tests de xarxa
+tests_xarxa() {
+	echo -e "\nTEST DE CONNECTIVITAT"
+	ping -c 2 -W 1 "$GATEWAY" >/dev/null 2>&1 && echo "✓ Connexió local OK" || echo "✗ Error local"
+	nslookup google.com >/dev/null 2>&1 && echo "✓ DNS funcionant" || echo "✗ Error DNS"
+	ping -c 2 8.8.8.8 >/dev/null 2>&1 && echo "✓ Connexió internet OK" || echo "✗ Sense internet"
+}
 
+# Ajuda per l'usuari
 show_help() {
 	echo "Ús: $0 [OPCIONS]"
 	echo "Opcions obligatòries per mode estàtic:"
