@@ -119,7 +119,7 @@ restore_backup() {
 	echo "Restaurant últim backup..."
 
 	# Trobar l'últim backup
-	LAST_BACKUP=$(ls -td "$BACKUP_DIR"/*/ | head -1)
+	LAST_BACKUP=$(ls -td "$BACKUP_DIR"/*/ | head -n -1)
 
 	if [ -z "$LAST_BACKUP" ]; then
 		echo "ERROR: No hi ha backups disponibles"
@@ -127,22 +127,22 @@ restore_backup() {
 	fi
 
 	# Restaurar fitxers
-    cp "$LAST_BACKUP/interfaces" /etc/network/ 2>/dev/null
-    cp "$LAST_BACKUP/resolv.conf" /etc/ 2>/dev/null
-    cp "$LAST_BACKUP"/*.yaml /etc/netplan/ 2>/dev/null
+    cp -f "$LAST_BACKUP/interfaces" /etc/network/ 2>/dev/null
+    cp -f "$LAST_BACKUP/resolv.conf" /etc/ 2>/dev/null
+    cp -f "$LAST_BACKUP"/*.yaml /etc/netplan/ 2>/dev/null
 
 	echo "Backup restaurat correctament. Reinicia el servei de xarxa."
 }
 
 conf_xarxa() {
-	if [ "DHCP" = true ]; then
+	if [ "$DHCP" = true ]; then
 		config_dhcp
 	else
 		config_static
 	fi
 
 	if [ -n "$DNS" ]; then
-		echo "nameserver" $DNS" > "$RESOLV_CONF"
+		echo "nameserver $DNS" > "$RESOLV_CONF"
 	fi
 }
 
@@ -210,3 +210,6 @@ show_help() {
 	echo "  --restore                 Restaurar backup"
 	echo "  --help                    Mostrar ajuda"
 }
+
+# Execució principal
+main "$@"
