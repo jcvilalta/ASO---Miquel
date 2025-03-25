@@ -134,11 +134,32 @@ restore_backup() {
 	echo "Backup restaurat correctament. Reinicia el servei de xarxa."
 }
 
-# Prova manual (executar amb --backup o --restore)
-if [ "$1" == "--backup" ]; then
-    do_backup
-elif [ "$1" == "--restore" ]; then
-    restore_backup
-else
-    echo "Ús: $0 [--backup|--restore]"
-fi
+conf_xarxa() {
+	if [ "DHCP" = true ]; then
+		config_dhcp
+	else
+		config_static
+	fi
+
+	if [ -n "$DNS" ]; then
+		echo "nameserver" $DNS" > "$RESOLV_CONF"
+	fi
+}
+
+config_dhcp() {
+	if [ -d "$NETPLAN_DIR" ]; then
+		cat > "$NETPLAN_DIR/01-dhcp.yaml" << EOF
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    $INTERFACE:
+      dhcp4: true
+EOF
+	  netplan apply
+	else
+	  nmcli con mod "$INTERFACE" ipv4.method auto
+	  nmcli con down "$INTERFACE"
+	  nmcli con up "$INTERFACE"
+	fi
+}
