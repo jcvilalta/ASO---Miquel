@@ -186,3 +186,19 @@ EOF
         nmcli con up "$INTERFACE"
     fi
 }
+
+
+show_help() {
+	echo "Ús: $0 [OPCIONS]"
+	echo "Opcions obligatòries per mode estàtic:"
+	echo "  --interface INTERFÍCIE    (ex: eth0)"
+	echo "  --ip ADREÇA_IP            (ex: 192.168.1.100)"
+	echo "  --netmask MÀSCARA         (ex: 24)"
+	echo "  --gateway PORTAD_ENLLAÇ   (ex: 192.168.1.1)"
+	echo "Opcions adicionals:"
+	echo "  --dns SERVIDOR_DNS        (ex: 8.8.8.8)"
+	echo "  --dhcp                    Utilitzar DHCP"
+	echo "  --backup                  Fer backup"
+	echo "  --restore                 Restaurar backup"
+	echo "  --help                    Mostrar ajuda"
+}
