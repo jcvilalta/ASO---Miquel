@@ -15,11 +15,57 @@ RESOLV_CONF="/etc/resolv.conf"
 FIREWALL_PROFILES=("none" "webserver" "ssh-only")
 
 main() {
-	processar_arguments "$@"
+	process_args "$@"
 	do_backup
-	config_xarxa
+	conf_xarxa
 	tests_xarxa
 	echo "Configuració de xarxa aplicada correctament"
+}
+
+process_args() {
+	while [[ $# -gt 0 ]]; do
+		case $1 in
+		    --interface)
+			INTERFACE="$2"
+			shift 2
+			;;
+		    --dhcp)
+			DHCP=true
+			shift
+			;;
+		    --ip)
+			IP="$2"
+			valid_ip "$IP"
+			shift 2
+			;;
+		    --netmask)
+			NETMASK="$2"
+			shift 2
+			;;
+		    --gateway)
+			GATEWAY="$2"
+			valid_ip "$GATEWAY"
+			shift 2
+			;;
+		    --dns)
+			DNS="$2"
+			valid_ip "$DNS"
+			shift 2
+			;;
+		    --backup)
+			do_backup
+			exit 0
+			;;
+		    --restore)
+			restore_backup
+			exit 0
+			;;
+		    --help)
+			show_help
+			exit 1
+			;;
+		esac
+	done
 }
 
 # Funció per crear backups de la configuració de xarxa
