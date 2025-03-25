@@ -14,6 +14,14 @@ NETPLAN_DIR="/etc/netplan"
 RESOLV_CONF="/etc/resolv.conf"
 FIREWALL_PROFILES=("none" "webserver" "ssh-only")
 
+main() {
+	processar_arguments "$@"
+	do_backup
+	config_xarxa
+	tests_xarxa
+	echo "Configuració de xarxa aplicada correctament"
+}
+
 # Funció per crear backups de la configuració de xarxa
 do_backup() {
 	echo "Fent backup de la configuració actual..."
