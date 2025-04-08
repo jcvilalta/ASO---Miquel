@@ -1,0 +1,8 @@
+# Ignorar tot
+*
+
+# No ignorar carpetes (permet explorar-les)
+!*/
+
+# No ignorar la carpeta scripts/
+!scripts/
