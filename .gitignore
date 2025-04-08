@@ -6,3 +6,8 @@
 
 # No ignorar la carpeta scripts/
 !scripts/
+
+# Ignorar fitxers de prova de la carpeta scripts/
+scripts/fitxer_de_prova.txt
+
+scripts/x
